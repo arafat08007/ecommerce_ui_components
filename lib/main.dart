@@ -63,18 +63,23 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SafeArea(
-        child: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Column(
+        child: SingleChildScrollView(
+          child: Center(
+            // Center is a layout widget. It takes a single child and positions it
+            // in the middle of the parent.
+            child: Column(
 
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              UIComponents.Btn_AddToCat('+ Add to cart ', () { })  ,
-              
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                UIComponents.UserImageWithGreetings('Good Evening', 'https://picsum.photos/250?image=9', 'Tanveer'),
+                UIComponents.Btn_AddToCart('+ Add to cart ', () { })  ,
+                UIComponents.ProductCardnormal('https://picsum.photos/250?image=9', 'Demo product', '22', '989', '4.5', 100, 100,'EURO'),
+            UIComponents.ProductCardColorSwitch('https://picsum.photos/250?image=9', 'Computer', '33.93', '100', '3.9', 200, 200, 5, 'USD')
 
 
-            ],
+
+              ],
+            ),
           ),
         ),
       ),
