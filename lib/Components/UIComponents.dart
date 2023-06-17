@@ -236,7 +236,7 @@ import 'constraints.dart';
     );
 
   }
-
+    // User image with greeting text
   static Widget UserImageWithGreetings(String grettingText, String UserImage, String UserName) {
     return Container(
       width: 200,
