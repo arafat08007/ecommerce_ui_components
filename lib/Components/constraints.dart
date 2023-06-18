@@ -7,5 +7,6 @@ class ColorSchema {
   static var primaryGrey = Color(0xff828282);
   static var primaryColor =   Color(0xffEE6231);
   static var ThemeBlack =   Color(0xff333333);
+  static var ligthBg =  Color(0xffFAFAFA);
   
 }

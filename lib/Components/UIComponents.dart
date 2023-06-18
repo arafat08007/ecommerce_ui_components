@@ -1,8 +1,67 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 import 'constraints.dart';
  class UIComponents {
+   //custom search bar
+   static TextEditingController _searchTextController = TextEditingController();
+   static FocusNode _searchFocusNode = FocusNode();
+   static Widget CustomSearch(double barH, double barW, String placeholder, TextEditingController _searchTextController, VoidCallback onMenuClick, VoidCallback onQRClick, VoidCallback onTextChange ){
+
+     
+            return Container(
+              width: barW,
+              height: barH,
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              color: ColorSchema.ligthBg,
+                child: TextField(
+                  controller: _searchTextController,
+                  decoration: InputDecoration(
+                    hintText: placeholder!=null?placeholder:'Search here',
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.menu_sharp),
+                      onPressed: () {
+                        onMenuClick;
+                        print('Menu clicked') ;
+                        // Perform the search here
+                      },
+                    ),
+                    suffixIcon: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
+                      mainAxisSize: MainAxisSize.min, // added line
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.clear_sharp),
+
+                          onPressed: () {
+                            _searchTextController.clear()  ;
+                            print('Clearing search bar') ;
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.qr_code),
+                          onPressed: () { 
+                            onQRClick;
+                            print('QR code clicked') ;
+                            }
+                        ),
+                      ],
+                    ),
+
+
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                      borderSide: BorderSide(color: ColorSchema.ligthBg),
+
+                    ),
+                  ),
+                )
+            );
+   }
+
    // Default Add to cart without icon
   static Widget Btn_AddToCart (String label, VoidCallback  onPressed) {
     return SizedBox(

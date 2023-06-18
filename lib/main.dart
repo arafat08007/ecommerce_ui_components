@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  TextEditingController searchTextController = TextEditingController();
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -49,8 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double sw = MediaQuery.of(context).size.width;
-    double sh = MediaQuery.of(context).size.height;
+    double sW = MediaQuery.of(context).size.width;
+    double sH = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -64,21 +64,29 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Center(
-            // Center is a layout widget. It takes a single child and positions it
-            // in the middle of the parent.
-            child: Column(
+          child: Container(
+            width: sW-15,
+            height: sH,
+            padding: const EdgeInsets.all(10) ,
+            child: Center(
+              // Center is a layout widget. It takes a single child and positions it
+              // in the middle of the parent.
 
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                UIComponents.UserImageWithGreetings('Good Evening', 'https://picsum.photos/250?image=9', 'Tanveer'),
-                UIComponents.Btn_AddToCart('+ Add to cart ', () { })  ,
-                UIComponents.ProductCardnormal('https://picsum.photos/250?image=9', 'Demo product', '22', '989', '4.5', 100, 100,'EURO'),
-            UIComponents.ProductCardColorSwitch('https://picsum.photos/250?image=9', 'Computer', '33.93', '100', '3.9', 200, 200, 5, 'USD')
+              child: Column(
+
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  UIComponents.CustomSearch(50, sW-10, '', searchTextController, () { }, () { }, () { }),
+                  Divider(),
+                  UIComponents.UserImageWithGreetings('Good Evening', 'https://picsum.photos/250?image=9', 'Tanveer'),
+                  UIComponents.Btn_AddToCart('+ Add to cart ', () { })  ,
+                  UIComponents.ProductCardnormal('https://picsum.photos/250?image=9', 'Demo product', '22', '989', '4.5', 100, 100,'EURO'),
+              UIComponents.ProductCardColorSwitch('https://picsum.photos/250?image=9', 'Computer', '33.93', '100', '3.9', 200, 200, 5, 'USD')
 
 
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
