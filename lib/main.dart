@@ -78,6 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   UIComponents.CustomSearch(50, sW-10, '', searchTextController, () { }, () { }, () { }),
                   Divider(),
+                  UIComponents.SupportCard(57, sW-50, '01717998754', '01713060427', (){}, (){})   ,
+                  Divider(),
                   UIComponents.UserImageWithGreetings('Good Evening', 'https://picsum.photos/250?image=9', 'Tanveer'),
                   UIComponents.Btn_AddToCart('+ Add to cart ', () { })  ,
                   UIComponents.ProductCardnormal('https://picsum.photos/250?image=9', 'Demo product', '22', '989', '4.5', 100, 100,'EURO'),

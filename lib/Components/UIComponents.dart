@@ -1,14 +1,16 @@
 
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
+import 'package:qr_code_dart_scan/qr_code_dart_scan.dart';
 import 'dart:ui';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constraints.dart';
+import 'package:url_launcher/url_launcher.dart';
  class UIComponents {
    //custom search bar
-   static TextEditingController _searchTextController = TextEditingController();
-   static FocusNode _searchFocusNode = FocusNode();
+ //  static TextEditingController _searchTextController = TextEditingController();
+ //  static FocusNode _searchFocusNode = FocusNode();
    static Widget CustomSearch(double barH, double barW, String placeholder, TextEditingController _searchTextController, VoidCallback onMenuClick, VoidCallback onQRClick, VoidCallback onTextChange ){
 
      
@@ -43,8 +45,8 @@ import 'constraints.dart';
                         ),
                         IconButton(
                           icon: Icon(Icons.qr_code),
-                          onPressed: () { 
-                            onQRClick;
+                          onPressed: () {
+                            ScanQRCode;
                             print('QR code clicked') ;
                             }
                         ),
@@ -60,6 +62,58 @@ import 'constraints.dart';
                   ),
                 )
             );
+   }
+// Scan QR code
+   static Widget ScanQRCode () {
+     return QRCodeDartScanView(
+         scanInvertedQRCode:true,
+         typeScan: TypeScan.live,
+       onCapture: (Result result){
+           print(result);
+       },
+
+
+     );
+   }
+   //Support card
+   static Widget SupportCard(double sH, double sW, String whatsappnum, String phonenum, VoidCallback chatscreen, VoidCallback emailintent){
+     return Container(
+       width: sW,
+         height: sH,
+         padding: EdgeInsets.all(5),
+
+         child: Row(
+           mainAxisAlignment: MainAxisAlignment.spaceAround,
+           crossAxisAlignment: CrossAxisAlignment.center,
+           children: [
+           Text ('Need support?'),
+             _separtor(0,5),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
+               mainAxisSize: MainAxisSize.min,
+               children: [
+                 IconButton(onPressed: (){
+                   String url =
+                       "https://wa.me/${whatsappnum}/?text=Greetings!";
+                   launch(url);
+
+                 }, icon:FaIcon(FontAwesomeIcons.whatsapp)),
+                 IconButton(
+                     onPressed: () async {
+                       final Uri launchUri = Uri(
+                         scheme: 'tel',
+                         path: phonenum,
+                       );
+                       await launchUrl(launchUri);
+                     },
+                     icon:Icon(Icons.call)
+                 ),
+                 IconButton(onPressed: (){}, icon:Icon(Icons.chat)),
+                 IconButton(onPressed: (){}, icon:Icon(Icons.email_rounded)),
+
+             ],)
+         ],)
+     );
    }
 
    // Default Add to cart without icon
@@ -181,8 +235,8 @@ import 'constraints.dart';
 
   }
   //Dynamic separetor
-  static Widget _separtor (double space){
-    return SizedBox(height: space)  ;
+  static Widget _separtor (double Hspace, double Wspace){
+    return SizedBox(height: Hspace, width: Wspace,)  ;
   }
   // Product Card
   static Widget ProductCardnormal(String imagepath, String productName, String price, String soldcount, String rating, double imgH, double imgW, String Currency){
@@ -205,9 +259,9 @@ import 'constraints.dart';
               image: imagepath,
               fit: BoxFit.contain,
             ),
-            _separtor(5),
+            _separtor(5,0),
               Text(productName!=null?productName:'No product name found',style: TextStyle(fontWeight: FontWeight.bold)),
-              _separtor(5),
+              _separtor(5,0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -218,7 +272,7 @@ import 'constraints.dart';
               RatingTag(rating, 14.0),
 
             ],),
-            _separtor(5),
+            _separtor(5,0),
             Btn_AddToCart('Add to cart', () {
 
             })   ,
@@ -252,20 +306,20 @@ import 'constraints.dart';
                 image: imagepath,
                 fit: BoxFit.contain,
               ),
-              _separtor(5),
+              _separtor(5,0),
               Text(productName!=null?productName:'No product name found', style: TextStyle(fontWeight: FontWeight.bold),),
-              _separtor(5),
+              _separtor(5,0),
               Divider(),
-              _separtor(3),
+              _separtor(3,0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                 Text('Color Swatch show here'),
 
               ],),
-              _separtor(3),
+              _separtor(3,0),
               Divider(),
-              _separtor(5),
+              _separtor(5,0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -275,7 +329,7 @@ import 'constraints.dart';
                   SoldCount(soldcount),
 
                 ],),
-              _separtor(5),
+              _separtor(5,0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -284,7 +338,7 @@ import 'constraints.dart';
                   Btn_IconAddToCart('Add to cart', () { })
 
                 ],),
-              _separtor(5),
+              _separtor(5,0),
 
 
 
