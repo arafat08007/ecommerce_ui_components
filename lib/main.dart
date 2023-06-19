@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   UIComponents.CustomSearch(50, sW-10, '', searchTextController, () { }, () { }, () { }),
                   Divider(),
-                  UIComponents.SupportCard(57, sW-50, '01717998754', '01713060427', (){}, (){})   ,
+                  UIComponents.SupportCard(60, sW-50, 'support', '01717998754', '01713060427', (){}, 'arafat.ba@pakizatvl.com',Colors.white)   ,
                   Divider(),
                   UIComponents.UserImageWithGreetings('Good Evening', 'https://picsum.photos/250?image=9', 'Tanveer'),
                   UIComponents.Btn_AddToCart('+ Add to cart ', () { })  ,

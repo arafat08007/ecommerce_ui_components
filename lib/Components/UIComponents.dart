@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
    //custom search bar
  //  static TextEditingController _searchTextController = TextEditingController();
  //  static FocusNode _searchFocusNode = FocusNode();
+   Color cardContentColor = Colors.white;
    static Widget CustomSearch(double barH, double barW, String placeholder, TextEditingController _searchTextController, VoidCallback onMenuClick, VoidCallback onQRClick, VoidCallback onTextChange ){
 
      
@@ -76,8 +77,21 @@ import 'package:url_launcher/url_launcher.dart';
      );
    }
    //Support card
-   static Widget SupportCard(double sH, double sW, String whatsappnum, String phonenum, VoidCallback chatscreen, VoidCallback emailintent){
+   static Widget SupportCard(double sH, double sW, String backgroundImg, String whatsappnum, String phonenum, VoidCallback chatscreen, String emailintent, cardContentColor){
      return Container(
+
+       decoration: BoxDecoration(
+         color: Colors.white,
+         borderRadius: BorderRadius.circular(5.0),
+         boxShadow:     [
+           BoxShadow(color: Colors.black12.withOpacity(0.02), spreadRadius: 3),
+         ],
+         image: DecorationImage(
+           image: AssetImage("assets/images/${backgroundImg}.jpg"),
+           fit: BoxFit.fill,
+         ),
+
+       ),
        width: sW,
          height: sH,
          padding: EdgeInsets.all(5),
@@ -86,8 +100,8 @@ import 'package:url_launcher/url_launcher.dart';
            mainAxisAlignment: MainAxisAlignment.spaceAround,
            crossAxisAlignment: CrossAxisAlignment.center,
            children: [
-           Text ('Need support?'),
-             _separtor(0,5),
+           Text ('Need support?', style: TextStyle(color: cardContentColor),),
+             _separator(0,5),
              Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
                mainAxisSize: MainAxisSize.min,
@@ -97,7 +111,7 @@ import 'package:url_launcher/url_launcher.dart';
                        "https://wa.me/${whatsappnum}/?text=Greetings!";
                    launch(url);
 
-                 }, icon:FaIcon(FontAwesomeIcons.whatsapp)),
+                 }, icon:FaIcon(FontAwesomeIcons.whatsapp,color: cardContentColor)),
                  IconButton(
                      onPressed: () async {
                        final Uri launchUri = Uri(
@@ -106,10 +120,26 @@ import 'package:url_launcher/url_launcher.dart';
                        );
                        await launchUrl(launchUri);
                      },
-                     icon:Icon(Icons.call)
+                     icon:Icon(Icons.call, color: cardContentColor,)
                  ),
-                 IconButton(onPressed: (){}, icon:Icon(Icons.chat)),
-                 IconButton(onPressed: (){}, icon:Icon(Icons.email_rounded)),
+                 IconButton(
+                     onPressed: () async{
+
+                     },
+                     icon:Icon(Icons.chat, color: cardContentColor)
+                 ),
+                 IconButton(onPressed: (){
+                   final Uri emailLaunchUri = Uri(
+                     scheme: 'mailto',
+                     path: emailintent,
+                     // query: encodeQueryParameters(<String, String>{
+                     //   'subject': 'Example Subject & Symbols are allowed!',
+                     //
+                     // }),
+                   );
+
+                   launchUrl(emailLaunchUri);
+                 }, icon:Icon(Icons.email_rounded, color: cardContentColor)),
 
              ],)
          ],)
@@ -235,7 +265,7 @@ import 'package:url_launcher/url_launcher.dart';
 
   }
   //Dynamic separetor
-  static Widget _separtor (double Hspace, double Wspace){
+  static Widget _separator (double Hspace, double Wspace){
     return SizedBox(height: Hspace, width: Wspace,)  ;
   }
   // Product Card
@@ -257,11 +287,11 @@ import 'package:url_launcher/url_launcher.dart';
                 height: imgH,
                 placeholder: 'assets/no_image.png',
               image: imagepath,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
-            _separtor(5,0),
+            _separator(5,0),
               Text(productName!=null?productName:'No product name found',style: TextStyle(fontWeight: FontWeight.bold)),
-              _separtor(5,0),
+              _separator(5,0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -272,7 +302,7 @@ import 'package:url_launcher/url_launcher.dart';
               RatingTag(rating, 14.0),
 
             ],),
-            _separtor(5,0),
+            _separator(5,0),
             Btn_AddToCart('Add to cart', () {
 
             })   ,
@@ -306,20 +336,20 @@ import 'package:url_launcher/url_launcher.dart';
                 image: imagepath,
                 fit: BoxFit.contain,
               ),
-              _separtor(5,0),
+              _separator(5,0),
               Text(productName!=null?productName:'No product name found', style: TextStyle(fontWeight: FontWeight.bold),),
-              _separtor(5,0),
+              _separator(5,0),
               Divider(),
-              _separtor(3,0),
+              _separator(3,0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                 Text('Color Swatch show here'),
 
               ],),
-              _separtor(3,0),
+              _separator(3,0),
               Divider(),
-              _separtor(5,0),
+              _separator(5,0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -329,7 +359,7 @@ import 'package:url_launcher/url_launcher.dart';
                   SoldCount(soldcount),
 
                 ],),
-              _separtor(5,0),
+              _separator(5,0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -338,7 +368,7 @@ import 'package:url_launcher/url_launcher.dart';
                   Btn_IconAddToCart('Add to cart', () { })
 
                 ],),
-              _separtor(5,0),
+              _separator(5,0),
 
 
 

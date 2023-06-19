@@ -63,6 +63,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/no_image.png
+    - assets/images/
     - assets/icons/
     - assets/icons/tabbar/bold/
     - assets/icons/tabbar/light/
